@@ -6,7 +6,6 @@
 
 "use strict";
 
-const _ 	= require("lodash");
 const Queue = require("bee-queue");
 
 module.exports = function createService(queueOpts) {
@@ -61,9 +60,9 @@ module.exports = function createService(queueOpts) {
 		 */
 		started() {
 			if (this.schema.queues) {
-				_.forIn(this.schema.queues, (fn, name) => {
+				for (const [name, fn] of Object.entries(animals)) {
 					this.getQueue(name).process(fn.bind(this));
-				});
+				}
 			}
 
 			return this.Promise.resolve();
